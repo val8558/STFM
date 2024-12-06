@@ -41,9 +41,6 @@ struct HomeView: View {
                         .frame(height: 20)
                     MenuContainerRightView(title: "Minha Evolução", content: "Veja os gráficos da sua evolução", image: "Evolution", imageWidth: 100, imageHeight: 100)
                 }
-            
-         
-          
         }.background(Color.backgroundGray)
             
     }

@@ -23,6 +23,7 @@ struct ProgressSectionView: View {
             ProgressView(value: progress, total: 1.0)
                 .frame(height: 10.0)
                 .progressViewStyle(LinearProgressViewStyle(tint: .yellow))
+                .scaleEffect(x: 1, y: 2, anchor: .center)
                 .padding(.horizontal, 20)
             
             Text(String(format: "%.0f%% Completo", progress * 100))

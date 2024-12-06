@@ -1,13 +1,13 @@
 //
-//  SwiftUIView.swift
+//  MealMenuContainerView.swift
 //  STFM
 //
-//  Created by Valmir Garcia on 03/12/24.
+//  Created by Valmir Garcia on 06/12/24.
 //
 
 import SwiftUI
 
-struct MenuContainerRightView: View {
+struct MealMenuContainerRightView: View {
     
     let title: String
     let content: String
@@ -44,9 +44,11 @@ struct MenuContainerRightView: View {
                 VStack {
                     Image(image)
                         .resizable()
+                        .scaledToFill()
+                        .clipShape(.ellipse)
                         .frame(width: imageWidth, height: imageHeight)
                         .padding(.bottom, 10)
-                        .padding(.trailing, 5)
+                        .padding(.trailing, 40)
                 }
             }
         }
@@ -56,11 +58,13 @@ struct MenuContainerRightView: View {
     }
 }
 
-struct MenuContainerLeftView: View {
+struct MealMenuContainerLeftView: View {
     
     let title: String
     let content: String
     let image: String
+    let imageWidth: CGFloat
+    let imageHeight: CGFloat
     
     var body: some View {
         VStack {
@@ -68,8 +72,11 @@ struct MenuContainerLeftView: View {
                 VStack {
                     Image(image)
                         .resizable()
-                        .frame(width: 90, height: 113)
+                        .scaledToFill()
+                        .clipShape(.ellipse)
+                        .frame(width: imageWidth, height: imageHeight)
                         .padding(.trailing, -30)
+                        .padding(.leading, 10)
                 }
                 VStack (alignment: .leading) {
                     Text(title)
@@ -101,7 +108,6 @@ struct MenuContainerLeftView: View {
     }
 }
 
-
 #Preview {
-    HomeView()
+    MyMeals()
 }
