@@ -10,7 +10,7 @@ import SwiftUI
 struct MenuContainerRightView: View {
     
     let title: String
-    let content: String
+    let content: String?
     let image: String
     let imageWidth: CGFloat
     let imageHeight: CGFloat
@@ -24,7 +24,7 @@ struct MenuContainerRightView: View {
                         .foregroundColor(.black)
                         .padding(.top, 10)
                         .padding(.bottom, 5)
-                    Text(content)
+                    Text(content ?? "")
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
                         .padding(.bottom, 16)

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct WaterIntakeView: View {
-    @State private var cups: [Bool] = Array(repeating: false, count: 6) // Representa 6 copos
-
+    @State private var cups: [Bool] = Array(repeating: false, count: 6)
     var body: some View {
         VStack {
             Text("Copos de água")
@@ -40,7 +39,7 @@ struct WaterIntakeView: View {
 
             ProgressView(value: Double(cups.filter { $0 }.count), total: Double(cups.count))
                 .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                .scaleEffect(x: 1, y: 2, anchor: .center) 
+                .scaleEffect(x: 1, y: 4, anchor: .center)
                 .padding(.horizontal)
         }
         .padding()
