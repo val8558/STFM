@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-<<<<<<< HEAD
 struct MealMenuContainerRightView: View {
     
     let title: String
@@ -106,18 +105,9 @@ struct MealMenuContainerLeftView: View {
         .frame(width: 380, height: 120)
         .background(Color.white)
         .cornerRadius(20)
-=======
-struct MealMenuContainerView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
->>>>>>> main
     }
 }
 
 #Preview {
-<<<<<<< HEAD
     MyMeals()
-=======
-    MealMenuContainerView()
->>>>>>> main
 }
