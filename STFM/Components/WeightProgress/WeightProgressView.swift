@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct WeightProgressView: View {
-    // Dados simulados para o gráfico (dinâmico no futuro)
+
     let weightData = [
         (week: "1", weight: 93),
         (week: "2", weight: 92),
@@ -65,12 +65,10 @@ struct WeightProgressView: View {
                
             }
             .padding(.horizontal)
-            
-            // Gráfico de barras
            
         }
         .padding()
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(Color(UIColor.white))
         .cornerRadius(20)
         .shadow(radius: 3)
     }

@@ -17,21 +17,6 @@ struct MealDetailView: View {
                     .frame(height: 300)
                     .clipped()
                     .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                
-                Button(action: {
-                    print("Voltar para Minhas Refeições")
-                }) {
-                    Image(systemName: "chevron.left")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.black)
-                        .padding(10)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 5)
-                }
-                .padding(.leading, 16)
-                .padding(.top, 16)
             }
             ScrollView {
                 VStack(alignment: .center, spacing: 20) {

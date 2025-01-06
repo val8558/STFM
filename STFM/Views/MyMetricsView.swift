@@ -11,15 +11,8 @@ struct MyMetricsView: View {
     var body: some View {
         VStack{
             HStack{
-                Button(action: {
-                    print("Voltar pressionado")
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                }
                 Spacer()
-                Text("Minhas Refeições")
+                Text("Minhas Medidas")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.black)
                 Spacer()
@@ -28,13 +21,19 @@ struct MyMetricsView: View {
             .padding()
             .background(Color.white)
             .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
-            .ignoresSafeArea()
-            Spacer()
-            WeightProgressView()
-            Spacer()
-            MenuContainerRightView (title: "Composição Corporal", content: "", image: "BodyComposition", imageWidth: 125, imageHeight: 100)
-            MenuContainerRightView (title: "Medidas", content: "", image: "Metrics_1", imageWidth: 125, imageHeight: 100)
+            
+            ScrollView{
+                WeightProgressView()
+                Spacer()
+                MenuContainerRightView (title: "Composição Corporal", content: "", image: "BodyComposition", imageWidth: 125, imageHeight: 100, linkTo: MyMeals())
+                MenuContainerLeftView(title: "Diagnostico de obesidade", content: "", image: "ObDiag", imageWidth: 125, imageHeight: 100, destination: MyMeals())
+                MenuContainerRightView (title: "Medidas", content: "", image: "Metrics_1", imageWidth: 125, imageHeight: 100, linkTo: MyMeals())
+                MenuContainerLeftView(title: "Diagnostico \nde obesidade", content: "", image: "ObDiag", imageWidth: 125, imageHeight: 100, destination: MyMeals())
+                Spacer()
+            }
+            
         }.background(Color.backgroundGray)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

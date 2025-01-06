@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct MealMenuContainerRightView: View {
-    
+struct MealMenuContainerRightView<Destination: View>: View {
     let title: String
     let content: String
     let image: String
     let imageWidth: CGFloat
     let imageHeight: CGFloat
+    let destination: Destination?
     
     var body: some View {
         VStack {
@@ -28,17 +28,16 @@ struct MealMenuContainerRightView: View {
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
                         .padding(.bottom, 16)
-                    Button(action: {
-                        print("Click")
-                    })
-                    {
-                        Text("Ver")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(width: 100, height: 31)
-                            .background(Color.black)
-                            .cornerRadius(10)
-                    }.padding(.bottom,10)
+                    if let destination = destination {
+                        NavigationLink(destination: destination) {
+                            Text("Ver")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(width: 100, height: 31)
+                                .background(Color.black)
+                                .cornerRadius(10)
+                        }.padding(.bottom,10)
+                    }
                 }.padding(.leading, 20)
                 Spacer()
                 VStack {
@@ -58,13 +57,14 @@ struct MealMenuContainerRightView: View {
     }
 }
 
-struct MealMenuContainerLeftView: View {
+struct MealMenuContainerLeftView<Destination: View>: View {
     
     let title: String
     let content: String
     let image: String
     let imageWidth: CGFloat
     let imageHeight: CGFloat
+    let destination: Destination?
     
     var body: some View {
         VStack {
@@ -82,23 +82,24 @@ struct MealMenuContainerLeftView: View {
                     Text(title)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
-                        .padding(.bottom, 5)
+//                        .padding(.bottom, 5)
                         .padding(.top, 10)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(2)
                     Text(content)
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
                         .padding(.bottom, 16)
-                    Button(action: {
-                        print("Click")
-                    })
-                    {
-                        Text("Ver")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(width: 100, height: 31)
-                            .background(Color.black)
-                            .cornerRadius(10)
-                    }.padding(.bottom,10)
+                    if let destination = destination {
+                        NavigationLink(destination: destination) {
+                            Text("Ver")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(width: 100, height: 31)
+                                .background(Color.black)
+                                .cornerRadius(10)
+                        }.padding(.bottom,10)
+                    }
                 }
             }
         }

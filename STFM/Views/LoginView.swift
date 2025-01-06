@@ -7,95 +7,96 @@
 
 import SwiftUI
 
-struct LoginPage: View {
+struct LoginView: View {
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var isValid: Bool = false
+    
     var body: some View {
-        ZStack {
+        NavigationStack{
+            ZStack {
                 Image("Login")
                     .resizable()
                     .scaledToFill()
+                    .ignoresSafeArea()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            ZStack {
-                VStack {
-                    Spacer()
-                    VStack (alignment: .leading){
-                        Text("Usuário")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(.bottom, 5)
-                            
-                        
-                        TextField("Digite seu usuário", text: .constant(""))
-                            .frame(width: 250, height: 30)
-                            .foregroundStyle(Color.white)
-                            .background(Color.clear)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10, style: .circular)
-                                    .stroke(Color.white, lineWidth: 1)
-                            ).padding(.bottom, 20)
-                    }
-                 
-                    VStack (alignment: .leading){
-                        Text("Senha")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(.bottom, 5)
-                        
-                        SecureField("Digite sua senha", text: .constant(""))
-                            .frame(width: 250, height: 30)
-                            .foregroundStyle(Color.white)
-                            .background(Color.clear)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10, style: .circular)
-                                    .stroke(Color.white, lineWidth: 1)
-                            )
-                            .padding(.bottom,20)
-                    }
-                        
-                    VStack (alignment: .center){
-                        Button(action: {
-                            print("Login")
-                        })
-                            {
-                            Text("Entrar")
+                
+                ZStack {
+                    VStack {
+                        Spacer()
+                        VStack (alignment: .leading){
+                            Text("Usuário")
                                 .font(.headline)
-                                .foregroundColor(.black)
-                                .frame(width: 250, height: 40)
-                                .background(Color.yellow)
-                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                                .padding(.bottom, 5)
+                            
+                            
+                            TextField("Digite seu usuário", text: $username)
+                                .frame(width: 250, height: 30)
+                                .foregroundStyle(Color.white)
+                                .background(Color.clear)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10, style: .circular)
+                                        .stroke(Color.white, lineWidth: 1)
+                                ).padding(.bottom, 20)
+                        }
+                        
+                        VStack (alignment: .leading){
+                            Text("Senha")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding(.bottom, 5)
+                            
+                            SecureField("Digite sua senha", text: $password)
+                                .frame(width: 250, height: 30)
+                                .foregroundStyle(Color.white)
+                                .background(Color.clear)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10, style: .circular)
+                                        .stroke(Color.white, lineWidth: 1)
+                                )
+                                .padding(.bottom,20)
+                        }
+                        
+                        VStack (alignment: .center){
+                            NavigationLink(destination: HomeView()) {
+                                Text("Entrar")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                    .frame(width: 250, height: 40)
+                                    .background(Color.yellow)
+                                    .cornerRadius(10)
+                            }
+
+                            HStack{
+                                Spacer()
+                                NavigationLink(destination: MyMeals()) {
+                                    Text("Esqueceu sua senha?")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .padding(.top, 12)
+                                }
                                 
-                            }.padding(.bottom,10)
-                        HStack{
-                            Spacer()
-                            Button(action: {
-                                print("Login")
-                            })
-                                {
-                                Text("Esqueceu sua senha?")
-                                    .font(.system(size: 10, weight: .bold))
-                                    .foregroundColor(.white)
-                                }.padding(.bottom,10)
-                            Spacer()
-                            Button(action: {
-                                print("Login")
-                            })
-                                {
-                                Text("Cadastrar")
-                                    .font(.system(size: 10, weight: .bold))
-                                    .foregroundColor(.white)
-                                }.padding(.bottom,10)
-                            Spacer()
+                                Spacer()
+                                NavigationLink(destination: RegisterCodeView()) {
+                                    Text("Cadastrar")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .padding(.top, 12)
+                                }
+                                Spacer()
+                            }
                         }
                     }
-          
-                }.padding(.bottom, 60)
+                    
+                }
+                .padding(.bottom, 80)
             }
         }.edgesIgnoringSafeArea(.all) .background(Color.black)
-        
     }
 }
 
 #Preview {
-    LoginPage()
+    LoginView()
 }
 

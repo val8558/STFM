@@ -11,7 +11,7 @@ import SwiftUI
 struct STFMApp: App {
     var body: some Scene {
         WindowGroup {
-            MyMeals()
+            LoginView()
         }
     }
 }

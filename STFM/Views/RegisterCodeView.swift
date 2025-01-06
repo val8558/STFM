@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegisterCodePage: View {
+struct RegisterCodeView: View {
     var body: some View {
         ZStack {
             Image("Register")
@@ -51,5 +51,5 @@ struct RegisterCodePage: View {
 }
 
 #Preview {
-    RegisterCodePage()
+    RegisterCodeView()
 }

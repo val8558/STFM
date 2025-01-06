@@ -14,14 +14,7 @@ struct MyMeals: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Button(action: {
-                    print("Voltar pressionado")
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                }
+            HStack(alignment: .center) {
                 Spacer()
                 Text("Minhas Refeições")
                     .font(.system(size: 20, weight: .bold))
@@ -37,16 +30,16 @@ struct MyMeals: View {
                 .padding()
             Spacer()
 
-            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80)
+            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
             Spacer()
                 .frame(height: 10)
-            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80)
+            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
             Spacer()
                 .frame(height: 10)
-            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80)
+            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
             Spacer()
                 .frame(height: 10)
-            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80)
+            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
             Spacer()
                 .frame(height: 10)
         }
