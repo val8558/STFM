@@ -86,7 +86,9 @@ struct MenuContainerLeftView<Destination: View>: View {
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.gray)
                             .padding(.bottom, 4)
-                    } else { Spacer() }
+                    } else {
+                        Spacer()
+                    }
                     if let destination = destination {
                         NavigationLink(destination: destination) {
                             Text("Ver")
@@ -107,6 +109,6 @@ struct MenuContainerLeftView<Destination: View>: View {
 }
 
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//}

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct STFMApp: App {
+    @StateObject private var clientManager = ClientManager()
+
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .environmentObject(clientManager)
         }
     }
 }

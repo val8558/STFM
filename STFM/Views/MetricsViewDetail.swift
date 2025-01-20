@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct MetricsViewDetail: View {
+    @ObservedObject var viewModel: MetricsDetailViewModel
+    let threeColumns = [
+        GridItem(.adaptive(minimum: 100))
+    ]
+    
+    let fourColumns = [
+        GridItem(.adaptive(minimum: 80))
+    ]
+    
     var body: some View {
-        VStack {
+        VStack (spacing: 16) {
             HStack{
                 Spacer()
-                Text("Minhas Medidas")
+                Text("Composição Corporal")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.black)
                 Spacer()
@@ -21,53 +30,109 @@ struct MetricsViewDetail: View {
             .padding()
             .background(Color.white)
             .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
+            
+            VStack(spacing: 24) {
+                mainMeasureContent
+
+                tagRow
+                Spacer()
+            }
+            .padding(.horizontal, 16)
         }
         .ignoresSafeArea()
         .background(Color.backgroundGray)
-//        Spacer()
-        mainMeasureContant
-            .background(Color.blue)
-        Spacer()
     }
     
-    @ViewBuilder private var mainMeasureContant: some View {
+    @ViewBuilder private var mainMeasureContent: some View {
         VStack {
-            HStack {
-                Text("Peso inicial")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.black)
-                Spacer()
-                Text("Peso atual")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.black)
-                Spacer()
-                Text("Minha meta")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.black)
+            LazyVGrid(columns: threeColumns) {
+                ForEach(0..<3, id: \.self) { index in
+                    if index == 0 {
+                        VStack (alignment: .center) {
+                            Text("Peso inicial")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+                            Text("98 Kg")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    } else if index == 1 {
+                        VStack (alignment: .center) {
+                            Text("Peso atual")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+                            Text("99 Kg")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    } else if index == 2 {
+                        VStack (alignment: .center) {
+                            Text("Minha meta")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+                            Text("80 Kg")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
             }
-                .padding(16)
-                .frame(width: 380)
-            
-            HStack {
-                Text("120kg")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
-                Spacer()
-                Text("130kg")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
-                Spacer()
-                Text("140kg")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
-            }
-            .padding(.bottom, 10)
-            .padding(.horizontal, 50)
+        }
+        .frame(height: 106)
+        .background(Color.white)
+        .clipShape(RoundedCornersShape(corners: [.topLeft, .topRight], radius: 20))
     }
-        .background(Color.red)
+    
+    @ViewBuilder var tagRow: some View {
+        VStack {
+            LazyVGrid(columns: fourColumns, alignment: .center) {
+                ForEach(0..<4, id: \.self) { index in
+                    if index == 0 {
+                        VStack (alignment: .center) {
+                            Text("Peso")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    } else if index == 1 {
+                        VStack (alignment: .center) {
+                            Text("Referência")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+                            Text("47,4 - 80,0")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    } else if index == 2 {
+                        VStack (alignment: .center) {
+                            Text("81,6")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+
+                        }
+                    } else if index == 3 {
+                        VStack {
+                            Text("Alto")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+//                        .frame(maxHeight: 100)
+                        .padding(.all, 30)
+                        .background(Color.red)
+                    }
+                }
+            }
+        }
+        .frame(height: 106)
+        .background(Color.white)
+        .clipShape(RoundedCornersShape(corners: .allCorners, radius: 20))
     }
 }
 
-#Preview {
-    MetricsViewDetail()
-}
+//#Preview {
+//    MetricsViewDetail()
+//}

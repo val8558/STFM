@@ -11,6 +11,7 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isValid: Bool = false
+    @EnvironmentObject var clientManager: ClientManager
     
     var body: some View {
         NavigationStack{
@@ -58,14 +59,33 @@ struct LoginView: View {
                                 .padding(.bottom,20)
                         }
                         
-                        VStack (alignment: .center){
-                            NavigationLink(destination: HomeView()) {
-                                Text("Entrar")
-                                    .font(.headline)
-                                    .foregroundColor(.black)
-                                    .frame(width: 250, height: 40)
-                                    .background(Color.yellow)
-                                    .cornerRadius(10)
+                        VStack (alignment: .center) {
+                            Button("Entrar") {
+                                let authenticatedClient = Client(
+                                    name: "Usuário Teste",
+                                    age: 30,
+                                    gender: .male,
+                                    currentWeight: 75.0,
+                                    weightGoal: 70.0,
+                                    reference: .normal
+                                )
+                                clientManager.updateClient(authenticatedClient)
+                            }
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .frame(width: 250, height: 40)
+                            .background(Color.yellow)
+                            .cornerRadius(10)
+
+                            NavigationLink(
+                                destination: HomeView()
+                                    .environmentObject(clientManager),
+                                isActive: Binding(
+                                    get: { clientManager.client != nil },
+                                    set: { _ in }
+                                )
+                            ) {
+                                EmptyView()
                             }
 
                             HStack{
@@ -96,7 +116,7 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}
 
