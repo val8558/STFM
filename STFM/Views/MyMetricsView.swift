@@ -34,9 +34,7 @@ struct MyMetricsView: View {
                         image: "BodyComposition",
                         imageWidth: 125,
                         imageHeight: 100,
-                        linkTo: MetricsViewDetail (
-                            viewModel: MetricsDetailViewModel(client: client)
-                        )
+                        linkTo: BodyCompositionView()
                     )
                     MenuContainerLeftView (
                         title: "Diagnostico de obesidade",

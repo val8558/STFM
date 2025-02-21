@@ -41,7 +41,6 @@ struct RegisterCodeView: View {
                             .frame(width: 250, height: 40)
                             .background(Color.yellow)
                             .cornerRadius(10)
-                            
                         }.padding(.bottom,10)
                     
                 }.padding(.bottom, 170)

@@ -76,6 +76,7 @@ struct LoginView: View {
                             .frame(width: 250, height: 40)
                             .background(Color.yellow)
                             .cornerRadius(10)
+                            .padding(.top, 10)
 
                             NavigationLink(
                                 destination: HomeView()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MetricsViewDetail: View {
     @ObservedObject var viewModel: MetricsDetailViewModel
+    
     let threeColumns = [
         GridItem(.adaptive(minimum: 100))
     ]
@@ -132,7 +133,3 @@ struct MetricsViewDetail: View {
         .clipShape(RoundedCornersShape(corners: .allCorners, radius: 20))
     }
 }
-
-//#Preview {
-//    MetricsViewDetail()
-//}

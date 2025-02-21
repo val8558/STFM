@@ -71,6 +71,14 @@ struct HomeView: View {
                 }
             } else {
                 Text("Carregando...")
+                    .onAppear {
+                        // Adicionando um pequeno delay para verificar se o client foi atualizado
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            if clientManager.client == nil {
+                                print("Erro: O clientManager não foi atualizado corretamente.")
+                            }
+                        }
+                    }
             }
         }
         .background(Color.backgroundGray)
