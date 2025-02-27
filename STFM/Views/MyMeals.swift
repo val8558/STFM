@@ -14,38 +14,39 @@ struct MyMeals: View {
     
     var body: some View {
         VStack{
-            HStack(alignment: .center) {
-                Spacer()
-                Text("Minhas Refeições")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
-                Spacer()
-            }
-            .padding(.top, 60)
-            .padding()
-            .background(Color.white)
-            .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
-            Spacer()
-            WaterIntakeView()
+            NavigationStack {
+                HStack(alignment: .center) {
+                    Spacer()
+                    Text("Minhas Refeições")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .padding(.top, 60)
                 .padding()
-            Spacer()
-
-            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-            Spacer()
-                .frame(height: 10)
-            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-            Spacer()
-                .frame(height: 10)
-            MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-            Spacer()
-                .frame(height: 10)
-            MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-            Spacer()
-                .frame(height: 10)
+                .background(Color.white)
+                .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
+                Spacer()
+                WaterIntakeView()
+                    .padding()
+                Spacer()
+                
+                MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
+                Spacer()
+                    .frame(height: 10)
+                MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
+                Spacer()
+                    .frame(height: 10)
+                MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
+                Spacer()
+                    .frame(height: 10)
+                MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
+                Spacer()
+                    .frame(height: 10)
+            }
         }
         .ignoresSafeArea()
         .background(Color.backgroundGray)
-        
     }
 }
 

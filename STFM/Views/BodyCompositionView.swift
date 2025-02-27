@@ -12,43 +12,31 @@ struct BodyCompositionView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Text("Composição Corporal")
-                    .font(.headline)
-                Spacer()
-            }
-            .padding()
-            .background(Color.white)
-//            headerView()
-
-            // Cards de informações principais
-            weightInfoView()
-
-            // Lista dos itens de composição corporal
-            List(viewModel.items) { item in
-                BodyCompositionRow(item: item)
-            }
-            .listStyle(PlainListStyle())
+                HStack(alignment: .center) {
+                    Spacer()
+                    Text("Composição Corporal")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .padding(.top, 60)
+                .padding()
+                .background(Color.white)
+                .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
+                
+                // Cards de informações principais
+                weightInfoView()
+                
+                // Lista dos itens de composição corporal
+                List(viewModel.items) { item in
+                    BodyCompositionRow(item: item)
+                }
+                .listStyle(PlainListStyle())
         }
-        .background(Color.gray.opacity(0.2))
-        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
+        .background(Color.backgroundGray)
     }
-
-    // Header com título e botão de voltar
-    private func headerView() -> some View {
-        VStack {
-            HStack {
-                Spacer()
-                Text("Composição Corporal")
-                    .font(.headline)
-                Spacer()
-            }
-            .padding()
-            .background(Color.white)
-        }
-    }
-
+    
     // Informações sobre peso inicial, atual e meta
     private func weightInfoView() -> some View {
         HStack {
@@ -100,7 +88,6 @@ struct BodyCompositionRow: View {
                 .foregroundColor(.black)
                 .cornerRadius(8)
         }
-//        .padding()
         .background(Color.white)
         .cornerRadius(12)
     }

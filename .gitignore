@@ -1,0 +1,8 @@
+.DS_Store
+# Arquivos locais do Xcode que devem ser ignorados
+*.xcuserstate
+*.xcuserdatad/
+*.xcscmblueprint
+*.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcscheme

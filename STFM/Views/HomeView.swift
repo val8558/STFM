@@ -49,15 +49,16 @@ struct HomeView: View {
                                 linkTo: MyMeals()
                             )
                         }
-                        Spacer().frame(height: 20)
-                        MenuContainerLeftView(
-                            title: "Minhas Medidas",
-                            content: "Consulte aqui suas medidas",
-                            image: "Metrics",
-                            imageWidth: 80,
-                            imageHeight: 100,
-                            destination: MyMetricsView()
-                        )
+                            Spacer().frame(height: 20)
+                            MenuContainerLeftView(
+                                title: "Minhas Medidas",
+                                content: "Consulte aqui suas medidas",
+                                image: "Metrics",
+                                imageWidth: 80,
+                                imageHeight: 100,
+                                destination: MyMetricsView()
+                            )
+
                         Spacer().frame(height: 20)
                         MenuContainerRightView(
                             title: "Minha Evolução",
