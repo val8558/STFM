@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isValid: Bool = false
-    @EnvironmentObject var clientManager: ClientManager
+//    @EnvironmentObject var clientManager: ClientManager
+    @State private var navigateHome: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -61,15 +63,17 @@ struct LoginView: View {
                         
                         VStack (alignment: .center) {
                             Button("Entrar") {
-                                let authenticatedClient = Client(
-                                    name: "Usuário Teste",
-                                    age: 30,
-                                    gender: .male,
-                                    currentWeight: 75.0,
-                                    weightGoal: 70.0,
-                                    reference: .normal
-                                )
-                                clientManager.updateClient(authenticatedClient)
+                                login()
+//                                let authenticatedClient = Client(
+//                                    name: "Usuário Teste",
+//                                    age: 30,
+//                                    gender: .male,
+//                                    currentWeight: 75.0,
+//                                    weightGoal: 70.0,
+//                                    reference: .normal
+//                                )
+//                                navigateHome = true
+//                                clientManager.updateClient(authenticatedClient)
                             }
                             .font(.headline)
                             .foregroundColor(.black)
@@ -78,16 +82,19 @@ struct LoginView: View {
                             .cornerRadius(10)
                             .padding(.top, 10)
 
-                            NavigationLink(
-                                destination: HomeView()
-                                    .environmentObject(clientManager),
-                                isActive: Binding(
-                                    get: { clientManager.client != nil },
-                                    set: { _ in }
-                                )
-                            ) {
-                                EmptyView()
+                            .navigationDestination(isPresented: $navigateHome) {
+                                HomeView()
                             }
+//                            NavigationLink(
+//                                destination: HomeView()
+//                                    .environmentObject(clientManager),
+//                                isActive: Binding(
+//                                    get: { clientManager.client != nil },
+//                                    set: { _ in }
+//                                )
+//                            ) {
+//                                EmptyView()
+//                            }
 
                             HStack{
                                 Spacer()
@@ -99,7 +106,7 @@ struct LoginView: View {
                                 }
                                 
                                 Spacer()
-                                NavigationLink(destination: RegisterCodeView()) {
+                                NavigationLink(destination: RegisterView()) {
                                     Text("Cadastrar")
                                         .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(.white)
@@ -114,6 +121,13 @@ struct LoginView: View {
                 .padding(.bottom, 80)
             }
         }.edgesIgnoringSafeArea(.all) .background(Color.black)
+    }
+    
+    func login() {
+        let params = ["email": username, "password": password]
+        AF.request("http://127.0.0.1:8000/api/auth/login", method: .post, parameters: params).responseString { response in
+            print(response)
+        }
     }
 }
 
