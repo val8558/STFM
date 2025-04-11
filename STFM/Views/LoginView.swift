@@ -104,15 +104,15 @@ struct LoginView: View {
                                         .foregroundColor(.white)
                                         .padding(.top, 12)
                                 }
-                                
-                                Spacer()
-                                NavigationLink(destination: RegisterView()) {
-                                    Text("Cadastrar")
-                                        .font(.system(size: 10, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.top, 12)
-                                }
-                                Spacer()
+//                                
+//                                Spacer()
+//                                NavigationLink(destination: RegisterView()) {
+//                                    Text("Cadastrar")
+//                                        .font(.system(size: 10, weight: .bold))
+//                                        .foregroundColor(.white)
+//                                        .padding(.top, 12)
+//                                }
+//                                Spacer()
                             }
                         }
                     }

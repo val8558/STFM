@@ -26,6 +26,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 TextField("", text: $name)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
@@ -39,6 +40,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 TextField("", text: $username)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
@@ -52,6 +54,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 TextField("", text: $email)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
@@ -65,6 +68,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 TextField("", text: $confirmEmail)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
@@ -78,6 +82,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 SecureField("", text: $password)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
@@ -91,6 +96,7 @@ struct RegisterView: View {
                     .padding(.bottom, 5)
                 
                 SecureField("", text: $confirmPassword)
+                    .padding()
                     .frame(width: 250, height: 30)
                     .foregroundStyle(Color.black)
                     .background(Color.clear)
