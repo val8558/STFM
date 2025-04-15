@@ -98,7 +98,7 @@ struct LoginView: View {
 
                             HStack{
                                 Spacer()
-                                NavigationLink(destination: MyMeals()) {
+                                NavigationLink(destination: ForgotPasswordView()) {
                                     Text("Esqueceu sua senha?")
                                         .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(.white)
@@ -126,7 +126,16 @@ struct LoginView: View {
     func login() {
         let params = ["email": username, "password": password]
         AF.request("http://127.0.0.1:8000/api/auth/login", method: .post, parameters: params).responseString { response in
-            print(response)
+            switch response.result {
+            case .success(let value):
+                if (value == "Cliente logado com sucesso") {
+                    navigateHome = true
+                } else {
+                    print(value)
+                }
+            case .failure(let value):
+                print(response)
+            }
         }
     }
 }
