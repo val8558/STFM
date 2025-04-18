@@ -9,9 +9,11 @@ import SwiftUI
 
 struct BodyCompositionView: View {
     @StateObject private var viewModel = BodyCompositionViewModel()
-
+    @EnvironmentObject var clientManager: ClientManager
+    
     var body: some View {
-        VStack {
+        if let client = clientManager.client {
+            VStack {
                 HStack(alignment: .center) {
                     Spacer()
                     Text("Composição Corporal")
@@ -25,30 +27,30 @@ struct BodyCompositionView: View {
                 .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
                 
                 // Cards de informações principais
-                weightInfoView()
+                weightInfoView(client: client)
                 
                 // Lista dos itens de composição corporal
                 List(viewModel.items) { item in
                     BodyCompositionRow(item: item)
                 }
                 .listStyle(PlainListStyle())
+            }
+            .ignoresSafeArea()
+            .background(Color.backgroundGray)
         }
-        .ignoresSafeArea()
-        .background(Color.backgroundGray)
     }
-    
     // Informações sobre peso inicial, atual e meta
-    private func weightInfoView() -> some View {
+    private func weightInfoView(client: Client) -> some View {
         HStack {
-            weightInfoBox(title: "Peso Inicial", value: "93 kg")
-            weightInfoBox(title: "Peso Atual", value: "93 kg")
-            weightInfoBox(title: "Minha Meta", value: "89 kg")
+            weightInfoBox(title: "Peso Inicial", value: String(format: "%.1f", client.initialWeight))
+            weightInfoBox(title: "Peso Atual", value: String(format: "%.1f", client.currentWeight))
+            weightInfoBox(title: "Minha Meta", value: String(format: "%.1f", client.weightGoal))
         }
         .padding()
         .background(Color.white)
         .cornerRadius(12)
     }
-
+    
     private func weightInfoBox(title: String, value: String) -> some View {
         VStack {
             Text(title)
@@ -65,7 +67,7 @@ struct BodyCompositionView: View {
 // Card de cada item da lista
 struct BodyCompositionRow: View {
     let item: BodyComposition
-
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {

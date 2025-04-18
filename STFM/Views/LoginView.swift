@@ -12,7 +12,7 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isValid: Bool = false
-//    @EnvironmentObject var clientManager: ClientManager
+    @EnvironmentObject var clientManager: ClientManager
     @State private var navigateHome: Bool = false
     
     var body: some View {
@@ -33,8 +33,8 @@ struct LoginView: View {
                                 .foregroundColor(.white)
                                 .padding(.bottom, 5)
                             
-                            
                             TextField("Digite seu usuário", text: $username)
+                                .padding()
                                 .frame(width: 250, height: 30)
                                 .foregroundStyle(Color.white)
                                 .background(Color.clear)
@@ -51,6 +51,7 @@ struct LoginView: View {
                                 .padding(.bottom, 5)
                             
                             SecureField("Digite sua senha", text: $password)
+                                .padding()
                                 .frame(width: 250, height: 30)
                                 .foregroundStyle(Color.white)
                                 .background(Color.clear)
@@ -85,16 +86,6 @@ struct LoginView: View {
                             .navigationDestination(isPresented: $navigateHome) {
                                 HomeView()
                             }
-//                            NavigationLink(
-//                                destination: HomeView()
-//                                    .environmentObject(clientManager),
-//                                isActive: Binding(
-//                                    get: { clientManager.client != nil },
-//                                    set: { _ in }
-//                                )
-//                            ) {
-//                                EmptyView()
-//                            }
 
                             HStack{
                                 Spacer()
@@ -104,15 +95,6 @@ struct LoginView: View {
                                         .foregroundColor(.white)
                                         .padding(.top, 12)
                                 }
-//                                
-//                                Spacer()
-//                                NavigationLink(destination: RegisterView()) {
-//                                    Text("Cadastrar")
-//                                        .font(.system(size: 10, weight: .bold))
-//                                        .foregroundColor(.white)
-//                                        .padding(.top, 12)
-//                                }
-//                                Spacer()
                             }
                         }
                     }
@@ -125,18 +107,24 @@ struct LoginView: View {
     
     func login() {
         let params = ["email": username, "password": password]
-        AF.request("http://127.0.0.1:8000/api/auth/login", method: .post, parameters: params).responseString { response in
-            switch response.result {
-            case .success(let value):
-                if (value == "Cliente logado com sucesso") {
+        
+        //        AF.request("http://127.0.0.1:8000/api/auth/login", method: .post, parameters: params)
+        AF.request("https://stfm.technest.com.br/api/auth/login", method: .post, parameters: params)
+            .validate()
+            .responseDecodable(of: LoginResponse.self) { response in
+                switch response.result {
+                case .success(let loginResponse):
+                    print("Cliente logado com sucesso: \(loginResponse.client.name)")
+                    print("Token: \(loginResponse.token)")
+                    print(loginResponse)
+                    clientManager.updateClient(loginResponse.client)
                     navigateHome = true
-                } else {
-                    print(value)
+                    UserDefaults.standard.set(loginResponse.token, forKey: "authToken")
+                    // Aqui você pode guardar o token ou salvar o client no app
+                case .failure(let error):
+                    print("Erro ao logar: \(error)")
                 }
-            case .failure(let value):
-                print(response)
             }
-        }
     }
 }
 
