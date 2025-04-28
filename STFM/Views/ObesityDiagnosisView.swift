@@ -1,14 +1,14 @@
 //
-//  BodyCompositionView.swift
+//  ObesityDiagnosisView.swift
 //  STFM
 //
-//  Created by Mariana Maiko on 18/02/25.
+//  Created by Mariana Maiko on 23/04/25.
 //
 
 import SwiftUI
 
-struct BodyCompositionView: View {
-    @StateObject private var viewModel = BodyCompositionViewModel()
+struct ObesityDiagnosisView: View {
+    @StateObject private var viewModel = ObesityDiagnosisViewModel()
     @EnvironmentObject var clientManager: ClientManager
     
     var body: some View {
@@ -16,7 +16,7 @@ struct BodyCompositionView: View {
             VStack {
                 HStack(alignment: .center) {
                     Spacer()
-                    Text("Composição Corporal")
+                    Text("Diagnóstico de obesidade")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.black)
                     Spacer()
@@ -68,7 +68,7 @@ struct BodyCompositionView: View {
 }
 
 // Card de cada item da lista
-struct BodyCompositionRow: View {
+struct ObesityDiagnosisRow: View {
     let item: BodyComposition
     
     var body: some View {

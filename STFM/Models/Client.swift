@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-enum Gender: String, Codable {
-    case male = "male"
-    case female = "female"
-}
+//enum Gender: String, Codable {
+//    case male = "male"
+//    case female = "female"
+//}
 
 enum Status: String, Codable {
     case tooHigh = "Muito alto"
@@ -44,32 +44,34 @@ struct Client: Decodable {
     let userId: Int
     let name: String
     let birth: String
-    let height: Int
-    let address: String
-    let addressNumber: Int
-    let complement: String
-    let district: String
-    let city: String
-    let career: String
-    let email: String
-    let whatsapp: String
-    let document: String
-    let avaliations: [Avaliation]
-    let objectives: [Objective]
-    let schedule: [Schedule]
+    let gender: String?
+    let height: Int?
+    let address: String?
+    let addressNumber: Int?
+    let complement: String?
+    let district: String?
+    let city: String?
+    let career: String?
+    let email: String?
+    let whatsapp: String?
+    let document: String?
+    let avaliations: [Avaliation]?
+    let objectives: [Objective]?
+    let schedule: [Schedule]?
     let createdAt: String
     let updatedAt: String
     
-        let initialWeight: Double = 0.0
-        let currentWeight: Double
-        let weightGoal: Double
-        let reference: Status
+//        let initialWeight: Double = 0.0
+//        let currentWeight: Double
+//        let weightGoal: Double
+//        let reference: Status
 
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
         case name
         case birth
+        case gender
         case height
         case address
         case addressNumber = "address_number"
@@ -86,10 +88,39 @@ struct Client: Decodable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         
-        case initialWeight
-        case currentWeight
-        case weightGoal
-        case reference
+//        case initialWeight
+//        case currentWeight
+//        case weightGoal
+//        case reference
+    }
+}
+
+extension Client {
+    var initialWeight: Double? {
+        return avaliations?.first?.weight
+    }
+    
+    var currentWeight: Double? {
+        return avaliations?.last?.weight
+    }
+    
+    var weightGoal: Double? {
+        return objectives?.first?.weight
+    }
+    
+    var age: Int? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        guard let birthDate = formatter.date(from: birth) else {
+            return nil
+        }
+
+        let calendar = Calendar.current
+        let now = Date()
+        let ageComponents = calendar.dateComponents([.year], from: birthDate, to: now)
+        return ageComponents.year
     }
 }
 

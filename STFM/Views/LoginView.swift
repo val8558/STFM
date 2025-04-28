@@ -25,82 +25,76 @@ struct LoginView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 ZStack {
-                    VStack {
-                        Spacer()
-                        VStack (alignment: .leading){
-                            Text("Usuário")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding(.bottom, 5)
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            Spacer(minLength: 480)
                             
-                            TextField("Digite seu usuário", text: $username)
-                                .padding()
-                                .frame(width: 250, height: 30)
-                                .foregroundStyle(Color.white)
-                                .background(Color.clear)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10, style: .circular)
-                                        .stroke(Color.white, lineWidth: 1)
-                                ).padding(.bottom, 20)
-                        }
-                        
-                        VStack (alignment: .leading){
-                            Text("Senha")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding(.bottom, 5)
+                            VStack (alignment: .leading) {
+                                Text("Usuário")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding(.bottom, 5)
+                                
+                                TextField("Digite seu usuário", text: $username)
+                                    .padding()
+                                    .frame(width: 250, height: 30)
+                                    .foregroundStyle(Color.white)
+                                    .background(Color.clear)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10, style: .circular)
+                                            .stroke(Color.white, lineWidth: 1)
+                                    )
+                            }
                             
-                            SecureField("Digite sua senha", text: $password)
-                                .padding()
-                                .frame(width: 250, height: 30)
-                                .foregroundStyle(Color.white)
-                                .background(Color.clear)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10, style: .circular)
-                                        .stroke(Color.white, lineWidth: 1)
-                                )
-                                .padding(.bottom,20)
-                        }
-                        
-                        VStack (alignment: .center) {
-                            Button("Entrar") {
-                                login()
-//                                let authenticatedClient = Client(
-//                                    name: "Usuário Teste",
-//                                    age: 30,
-//                                    gender: .male,
-//                                    currentWeight: 75.0,
-//                                    weightGoal: 70.0,
-//                                    reference: .normal
-//                                )
-//                                navigateHome = true
-//                                clientManager.updateClient(authenticatedClient)
+                            VStack (alignment: .leading){
+                                Text("Senha")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding(.bottom, 5)
+                                
+                                SecureField("Digite sua senha", text: $password)
+                                    .padding()
+                                    .frame(width: 250, height: 30)
+                                    .foregroundStyle(Color.white)
+                                    .background(Color.clear)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10, style: .circular)
+                                            .stroke(Color.white, lineWidth: 1)
+                                    )
                             }
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .frame(width: 250, height: 40)
-                            .background(Color.yellow)
-                            .cornerRadius(10)
-                            .padding(.top, 10)
-
-                            .navigationDestination(isPresented: $navigateHome) {
-                                HomeView()
-                            }
-
-                            HStack{
-                                Spacer()
-                                NavigationLink(destination: ForgotPasswordView()) {
-                                    Text("Esqueceu sua senha?")
-                                        .font(.system(size: 10, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.top, 12)
+                            
+                            VStack (alignment: .center) {
+            
+                                Button("Entrar") {
+                                    login()
                                 }
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .frame(width: 250, height: 40)
+                                .background(Color.yellow)
+                                .cornerRadius(10)
+                                .padding(.top, 10)
+                                
+                                .navigationDestination(isPresented: $navigateHome) {
+                                    HomeView()
+                                }
+                                
+                                HStack {
+                                    Spacer()
+                                    NavigationLink(destination: ForgotPasswordView()) {
+                                        Text("Esqueceu sua senha?")
+                                            .font(.system(size: 16, weight: .bold))
+                                            .foregroundColor(.white)
+                                            .padding()
+                                    }
+                                }
+                                .padding(.top, 12)
+                                .padding(.horizontal)
+                                .padding(.bottom, 100)
                             }
                         }
                     }
-                    
                 }
-                .padding(.bottom, 80)
             }
         }.edgesIgnoringSafeArea(.all) .background(Color.black)
     }
@@ -109,7 +103,7 @@ struct LoginView: View {
         let params = ["email": username, "password": password]
         
         //        AF.request("http://127.0.0.1:8000/api/auth/login", method: .post, parameters: params)
-        AF.request("https://stfm.technest.com.br/api/auth/login", method: .post, parameters: params)
+        AF.request("https://stfm.technest.net.br/api/client/login", method: .post, parameters: params)
             .validate()
             .responseDecodable(of: LoginResponse.self) { response in
                 switch response.result {
@@ -117,12 +111,14 @@ struct LoginView: View {
                     print("Cliente logado com sucesso: \(loginResponse.client.name)")
                     print("Token: \(loginResponse.token)")
                     print(loginResponse)
+                    
                     clientManager.updateClient(loginResponse.client)
                     navigateHome = true
                     UserDefaults.standard.set(loginResponse.token, forKey: "authToken")
                     // Aqui você pode guardar o token ou salvar o client no app
                 case .failure(let error):
                     print("Erro ao logar: \(error)")
+                    
                 }
             }
     }

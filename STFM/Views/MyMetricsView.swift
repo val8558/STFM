@@ -42,7 +42,7 @@ struct MyMetricsView: View {
                             content: "", image: "ObDiag",
                             imageWidth: 125,
                             imageHeight: 100,
-                            destination: BodyCompositionView()
+                            destination: ObesityDiagnosisView()
                         )
                         MenuContainerRightView (
                             title: "Medidas",
@@ -50,7 +50,7 @@ struct MyMetricsView: View {
                             image: "Metrics_1",
                             imageWidth: 125,
                             imageHeight: 100,
-                            linkTo: MyMeals()
+                            linkTo: MeasuresView()
                         )
                         MenuContainerLeftView (
                             title: "Outras medidas",

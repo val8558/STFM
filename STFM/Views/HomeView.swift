@@ -70,6 +70,7 @@ struct HomeView: View {
                         )
                     }
                 }
+                .navigationBarBackButtonHidden(true)
             } else {
                 Text("Carregando...")
                     .onAppear {
