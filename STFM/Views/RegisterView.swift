@@ -109,9 +109,6 @@ struct RegisterView: View {
                     print("Login")
                     createUser()
                 }
-//                    .navigationDestination(isPresented: $navigateHome) {
-//                        HomeView()
-//                    }
                 )
                 {
                     Text("Cadastrar")

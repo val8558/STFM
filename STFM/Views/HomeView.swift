@@ -66,7 +66,7 @@ struct HomeView: View {
                             image: "Evolution",
                             imageWidth: 100,
                             imageHeight: 100,
-                            linkTo: MyMeals()
+                            linkTo: ErrorPageView()
                         )
                     }
                 }

@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ErrorPageView: View {
     var body: some View {
-//        Image
-        Text("Error")
+        VStack(alignment: .center, spacing: 50) {
+            Image("error-image")
+            Text("Ops... \nAinda estamos construindo essa parte")
+                .font(.system(size: 18, weight: .bold))
+        }
     }
 }
 

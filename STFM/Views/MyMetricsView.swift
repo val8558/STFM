@@ -58,7 +58,7 @@ struct MyMetricsView: View {
                             image: "ObDiag",
                             imageWidth: 125,
                             imageHeight: 100,
-                            destination: MyMeals()
+                            destination: ErrorPageView()
                         )
                         Spacer()
                     }
