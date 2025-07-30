@@ -16,16 +16,16 @@ class BodyCompositionViewModel: ObservableObject {
             print("Erro: idade inválida.")
             return
         }
-        
-        let weight = String(format: "%.1f", client.currentWeight ?? 0.0)
-        
-        let skeletalMuscleRange = skeletalMuscleReference(for: client.gender ?? "x", age: age)
+        let weight = String(format: "%.1f", client.currentWeight ?? 0.0) + "kg"
+        let skeletalMuscleRange = skeletalMuscleReference(for: client.gender ?? "x", age: age) //faltando valor do back
+        let bodyMuscle = String(format: "%.1f", client.avaliations.last?.bodyMuscle ?? 0.0) + "%"
+        let bodyAge = String(client.bodyAge)
         
         self.items = [
             BodyComposition(title: "Peso", reference: "47,4 ~ 84,0", value: weight, status: "Muito Alto", color: .high),
-            BodyComposition(title: "Músculo Esquelético", reference: skeletalMuscleRange, value: "39,8kg", status: "Excelente", color: .excellent),
-            BodyComposition(title: "Massa Muscular", reference: "34,2 ~ 50,5Kg", value: "59,5kg", status: "Ótimo", color: .good),
-            BodyComposition(title: "Idade Corporal", reference: "47,4 ~ 84,0", value: "81,7kg", status: "+23 Anos", color: .neutral),
+            BodyComposition(title: "Músculo Esquelético", reference: skeletalMuscleRange, value: "", status: "Excelente", color: .excellent),
+            BodyComposition(title: "Massa Muscular", reference: "34,2 ~ 50,5Kg", value: bodyMuscle, status: "Ótimo", color: .good),
+            BodyComposition(title: "Idade Corporal", reference: "47,4 ~ 84,0", value: bodyAge, status: "+23 Anos", color: .neutral),
         ]
     }
     

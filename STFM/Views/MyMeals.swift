@@ -8,52 +8,73 @@
 import SwiftUI
 
 struct MyMeals: View {
+    @EnvironmentObject var clientManager: ClientManager
     
     @State private var numberOfCups: Int = 0
     private let maxCups: Int = 6
+    let diet: Diet
     
     var body: some View {
         VStack{
             NavigationStack {
-                HStack(alignment: .center) {
-                    Spacer()
-                    Text("Minhas Refeições")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                    Spacer()
-                }
-                .padding(.top, 60)
-                .padding()
-                .background(Color.white)
-                .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
-                Spacer()
                 WaterIntakeView()
                     .padding()
                 Spacer()
-                
-                MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
+
+                ForEach(diet.meals, id: \.id) { meal in
+                    let title = mealTypeTitle(for: meal.type)
+                    let image = mealTypeImage(for: meal.type)
+                    MealMenuContainerLeftView(
+                        title: title,
+                        content: "",
+                        image: image,
+                        imageWidth: 50,
+                        imageHeight: 80,
+                        destination: MealDetailView(meal: meal, mealTitle: title)
+                    )
+                }
+                .padding()
                 Spacer()
-                    .frame(height: 10)
-                MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-                Spacer()
-                    .frame(height: 10)
-                MealMenuContainerRightView(title: "Café da manhã", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-                Spacer()
-                    .frame(height: 10)
-                MealMenuContainerLeftView(title: "Lanche", content: "Recomendadas 300 - 500 Kcal", image: "Breakfast", imageWidth: 50, imageHeight: 80, destination: MealDetailView())
-                Spacer()
-                    .frame(height: 10)
             }
+            .navigationTitle("Minhas Refeições")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .ignoresSafeArea()
+        //            .ignoresSafeArea()
         .background(Color.backgroundGray)
+        //        .ignoresSafeArea()
+    }
+}
+
+private func mealTypeTitle(for type: Int) -> String {
+    switch type {
+    case 0: return "Dejejum"
+    case 1: return "Café da Manhã"
+    case 2: return "Almoço"
+    case 3: return "Café da Tarde"
+    case 4: return "Lanche da Tarde"
+    case 5: return "Jantar"
+    case 6: return "Ceia"
+    default: return "Refeição"
+    }
+}
+
+private func mealTypeImage(for type: Int) -> String {
+    switch type {
+    case 0: return "dejejum"
+    case 1: return "BreakFast"
+    case 2: return "almoco"
+    case 3: return "cafeDaTarde"
+    case 4: return "lancheTarde"
+    case 5: return "almoco"
+    case 6: return "ceia"
+    default: return "BreakFast"
     }
 }
 
 struct RoundedCornersShape: Shape {
     var corners: UIRectCorner
     var radius: CGFloat
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(
             roundedRect: rect,
@@ -64,6 +85,6 @@ struct RoundedCornersShape: Shape {
     }
 }
 
-#Preview {
-    MyMeals()
-}
+//#Preview {
+//    MyMeals(diet: Client.example.diets!.first!)
+//}

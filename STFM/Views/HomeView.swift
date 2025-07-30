@@ -39,14 +39,14 @@ struct HomeView: View {
                         Spacer()
                         ProgressSectionView()
                         Spacer()
-                        NavigationLink(destination: MyMeals()) {
+                        NavigationLink(destination: DietsView()) {
                             MenuContainerRightView(
                                 title: "Minhas Refeições",
                                 content: "Consulte aqui o cardápio",
                                 image: "Meal",
                                 imageWidth: 110,
                                 imageHeight: 85,
-                                linkTo: MyMeals()
+                                linkTo: DietsView()
                             )
                         }
                             Spacer().frame(height: 20)

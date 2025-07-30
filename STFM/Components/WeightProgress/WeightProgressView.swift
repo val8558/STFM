@@ -27,7 +27,7 @@ struct WeightProgressView: View {
                         Text("Peso atual")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.black)
-                        if let ultimoPeso = client.avaliations?.last?.weight {
+                        if let ultimoPeso = client.avaliations.last?.weight {
                             Text("\(String(format: "%.1f", ultimoPeso)) kg")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.black)
@@ -45,9 +45,11 @@ struct WeightProgressView: View {
 //                                .font(.system(size: 24, weight: .bold))
 //                                .foregroundColor(.black)
 //                        }
-                        Text("\(client.objectives)")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(Color.black)
+                        if let lastWeightTarget = client.objectives?.last?.weight {
+                            Text("\(String(format: "%.1f", lastWeightTarget)) kg")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(Color.black)
+                        }
                     }
                     Spacer()
                     VStack (alignment: .center, spacing: 4){

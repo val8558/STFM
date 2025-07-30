@@ -55,9 +55,10 @@ struct Client: Decodable {
     let email: String?
     let whatsapp: String?
     let document: String?
-    let avaliations: [Avaliation]?
+    let avaliations: [Avaliation]
     let objectives: [Objective]?
     let schedule: [Schedule]?
+    let diets: [Diet]?
     let createdAt: String
     let updatedAt: String
     
@@ -85,6 +86,7 @@ struct Client: Decodable {
         case avaliations
         case objectives
         case schedule
+        case diets
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         
@@ -97,15 +99,28 @@ struct Client: Decodable {
 
 extension Client {
     var initialWeight: Double? {
-        return avaliations?.first?.weight
+        guard let firstAvaliation = avaliations.first else {
+            return nil
+        }
+        return firstAvaliation.weight
     }
     
     var currentWeight: Double? {
-        return avaliations?.last?.weight
+        guard let lastAvaliation = avaliations.last else {
+            return nil
+        }
+        return lastAvaliation.weight
     }
     
     var weightGoal: Double? {
         return objectives?.first?.weight
+    }
+    
+    var bodyAge: Int {
+        guard let lastBodyAge = avaliations.last?.bodyAge else {
+            return 0
+        }
+        return lastBodyAge
     }
     
     var age: Int? {
@@ -178,3 +193,86 @@ struct Schedule: Decodable {
     }
 }
 
+struct Diet: Decodable, Identifiable, Hashable {
+    let id: Int
+    let clientId: Int
+    let startDate: String
+    let endDate: String?
+    let status: Int
+    let createdAt: String
+    let updatedAt: String
+    let meals: [Meal]
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case clientId = "client_id"
+        case startDate = "start_date"
+        case endDate = "end_date"
+        case status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case meals
+    }
+}
+
+struct Meal: Decodable, Identifiable, Hashable {
+    let id: Int
+    let dietId: Int
+    let type: Int
+    let meal: String
+    let status: Int
+    let createdAt: String
+    let updatedAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case dietId = "diet_id"
+        case type
+        case meal
+        case status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+extension Client {
+    static let example = Client(
+        id: 1,
+        userId: 1, name: "Cliente Exemplo",
+        birth: "1990-01-01",
+        gender: nil,
+        height: nil,
+        address: nil,
+        addressNumber: nil,
+        complement: nil,
+        district: nil,
+        city: "exemplo@email.com",
+        career: "11999999999",
+        email: nil,
+        whatsapp: "2025-01-01T00:00:00Z",
+        document: "2025-01-01T00:00:00Z",
+        avaliations: [],
+        objectives: nil,
+        schedule: [],
+        diets: [
+            Diet(
+                id: 1,
+                clientId: 1,
+                startDate: "2025-01-01",
+                endDate: nil,
+                status: 0,
+                createdAt: "2025-01-01T00:00:00Z",
+                updatedAt: "2025-01-01T00:00:00Z",
+                meals: [
+                    Meal(
+                        id: 1,
+                        dietId: 1,
+                        type: 2,
+                        meal: "Almoço teste",
+                        status: 0,
+                        createdAt: "2025-01-01T00:00:00Z",
+                        updatedAt: "2025-01-01T00:00:00Z"
+                    )
+                ]
+            )], createdAt: "",
+        updatedAt: "")}

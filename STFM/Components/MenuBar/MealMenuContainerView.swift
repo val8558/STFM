@@ -17,7 +17,7 @@ struct MealMenuContainerRightView<Destination: View>: View {
     
     var body: some View {
         VStack {
-            HStack (){
+            HStack {
                 VStack (alignment: .leading) {
                     Text(title)
                         .font(.system(size: 16, weight: .bold))
@@ -52,8 +52,9 @@ struct MealMenuContainerRightView<Destination: View>: View {
             }
         }
         .frame(width: 380, height: 120)
-        .background(Color.white)
+        .background(Color.blue)
         .cornerRadius(20)
+        .border(.black, width: 0.5)
     }
 }
 
@@ -108,7 +109,7 @@ struct MealMenuContainerLeftView<Destination: View>: View {
         .cornerRadius(20)
     }
 }
-
-#Preview {
-    MyMeals()
-}
+//
+//#Preview {
+//    MyMeals()
+//}

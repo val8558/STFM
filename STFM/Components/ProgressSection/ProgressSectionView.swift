@@ -11,6 +11,14 @@ struct ProgressSectionView: View {
     @State private var progress: Double = 0.5 // Progresso inicial (50%)
     @EnvironmentObject var clientManager: ClientManager
     
+    private func calculateProgress(current: Double?, goal: Double?) -> Double {
+        guard let current = current, let goal = goal, goal != 0 else {
+            return 0.0
+        }
+        let difference = abs(current - goal)
+        let totalChange = abs((current > goal ? current - goal : goal - current))
+        return 1.0 - (difference / totalChange)
+    }
     
     var body: some View {
         if let client = clientManager.client {
@@ -23,13 +31,13 @@ struct ProgressSectionView: View {
                     .padding(.bottom, 30)
                 
                 
-                ProgressView(value: progress, total: 1.0)
+                ProgressView(value: calculateProgress(current: client.initialWeight, goal: client.weightGoal), total: 1.0)
                     .frame(height: 10.0)
                     .progressViewStyle(LinearProgressViewStyle(tint: .yellow))
                     .scaleEffect(x: 1, y: 2, anchor: .center)
                     .padding(.horizontal, 20)
                 
-                Text(String(format: "%.0f%% Completo", progress * 100))
+                Text(String(format: "%.0f%% Completo", calculateProgress(current: client.currentWeight, goal: client.weightGoal) * 100))
                     .font(.headline)
                     .foregroundColor(.black)
                     .padding(.top, 5)
@@ -44,7 +52,7 @@ struct ProgressSectionView: View {
                                 .padding(.top, 20)
                                 .padding(.bottom, 5)
                             
-                            Text("\(client.currentWeight) kg")
+                            Text("\(client.currentWeight ?? 0.0, specifier: "%.1f") kg")
                                 .font(.system(size: 16, weight: .semibold))
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
@@ -56,11 +64,12 @@ struct ProgressSectionView: View {
                                 .foregroundColor(.black)
                                 .padding(.bottom, 5)
                             
-                            Text("\(client.weightGoal) kg")
+                            Text("\(client.weightGoal ?? 0.0, specifier: "%.1f") kg")
                                 .font(.system(size: 16, weight: .semibold))
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                                 .padding(.bottom, 30)
+                                 
                         }
                         VStack {
                             Text("Próxima consulta")
