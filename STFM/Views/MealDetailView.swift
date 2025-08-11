@@ -11,48 +11,18 @@ struct MealDetailView: View {
     let meal: Meal
     let mealTitle: String
     var body: some View {
-//        VStack(spacing: 0) {
-//            ZStack(alignment: .topLeading) {
-//                Image("Breakfast") // Substitua por sua imagem real
-//                    .resizable()
-//                    .scaledToFill()
-//                    .frame(height: 300)
-//                    .clipped()
-//                    .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-//            }
+
         Spacer()
             ScrollView {
                 VStack(alignment: .center, spacing: 20) {
-//                    VStack(alignment: .center, spacing: 4) {
                     Text(mealTitle)
                             .font(.title2.bold())
                             .foregroundColor(.black)
-                        
-//                        Text("Avocado Egg Toast")
-//                            .font(.subheadline)
-//                            .foregroundColor(.gray)
-//                    }
                     .padding(.horizontal, 16)
-                    
-//                    
-//                    HStack(spacing: 16) {
-//                        NutritionCard(color: .black, title: "Proteínas", value: "21 g")
-//                        NutritionCard(color: .orange, title: "Carboidratos", value: "18 g")
-//                        NutritionCard(color: .blue, title: "Gordura", value: "10 g")
-//                    }
-//                    .padding(.horizontal, 16)
-                    
                     VStack(alignment: .center, spacing: 10) {
                         Text(meal.meal)
                             .font(.headline)
                             .foregroundColor(.black)
-                        
-//                        Text("""
-//                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.Proin in finibus velit. Phasellus eget dictum libero. Cras finibus nunc bibendum posuere cursus. Nulla consectetur nec est ac lacinia.
-//                             """)
-//                        .font(.body)
-//                        .foregroundColor(.gray)
-//                        .multilineTextAlignment(.leading)
                     }
                     .padding(.horizontal, 16)
                 }
@@ -63,8 +33,6 @@ struct MealDetailView: View {
             .background(Color(UIColor.systemGroupedBackground))
             .cornerRadius(20)
             .padding(.top, -20)
-//        }
-//        .edgesIgnoringSafeArea(.top)
     }
 }
 

@@ -51,36 +51,37 @@ struct DietsView: View {
     @ViewBuilder
     private func infoCard(diet: Diet, title: String, image: String) -> some View {
         RoundedRectangle(cornerRadius: 10)
-            .frame(height: 180)
-            .padding()
+            .frame(height: 150)
+//            .padding()
             .foregroundStyle(.white)
             .overlay(cardOverlay(title: title, image: image, selectedDietValue: diet))
     }
     
     @ViewBuilder
     private func cardOverlay(title: String, image: String, selectedDietValue: Diet) -> some View {
-        HStack {
+        HStack(spacing: 36) {
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.largeTitle)
+                    .font(.title)
                     .foregroundColor(.black)
                     .bold()
                 Button {
                     selectedDiet = selectedDietValue
                 } label: {
                     Text("Ver")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.white)
-                        .frame(width: 150, height: 50)
+                        .frame(width: 140, height: 40)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
                 .padding()
                 .cornerRadius(12)
             }
+//            Spacer()
             Image(image)
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 90, height: 90)
         }
     }
 }

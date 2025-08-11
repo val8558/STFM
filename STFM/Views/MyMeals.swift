@@ -19,21 +19,34 @@ struct MyMeals: View {
             NavigationStack {
                 WaterIntakeView()
                     .padding()
-                Spacer()
+//                Spacer()
 
-                ForEach(diet.meals, id: \.id) { meal in
-                    let title = mealTypeTitle(for: meal.type)
-                    let image = mealTypeImage(for: meal.type)
-                    MealMenuContainerLeftView(
-                        title: title,
-                        content: "",
-                        image: image,
-                        imageWidth: 50,
-                        imageHeight: 80,
-                        destination: MealDetailView(meal: meal, mealTitle: title)
-                    )
+                if diet.meals.isEmpty {
+                    VStack {
+                        Image("mulherErro")
+                            .resizable()
+                            .frame(width: 100, height: 250)
+                        Text("Você ainda não tem nenhuma dieta aqui")
+                            .foregroundColor(.black)
+                            .bold()
+                            .padding()
+                    }
+                } else {
+                    ForEach(diet.meals, id: \.id) { meal in
+                        let title = mealTypeTitle(for: meal.type)
+                        let image = mealTypeImage(for: meal.type)
+                        MealMenuContainerLeftView(
+                            title: title,
+                            content: "",
+                            image: image,
+                            imageWidth: 50,
+                            imageHeight: 80,
+                            destination: MealDetailView(meal: meal, mealTitle: title)
+                        )
+                    }
+                    .padding()
                 }
-                .padding()
+
                 Spacer()
             }
             .navigationTitle("Minhas Refeições")
