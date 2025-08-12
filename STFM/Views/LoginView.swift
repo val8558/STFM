@@ -14,6 +14,7 @@ struct LoginView: View {
     @State private var isValid: Bool = false
     @EnvironmentObject var clientManager: ClientManager
     @State private var navigateHome: Bool = false
+    @State private var showLoginError: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -96,7 +97,13 @@ struct LoginView: View {
                     }
                 }
             }
-        }.edgesIgnoringSafeArea(.all) .background(Color.black)
+        }
+        .edgesIgnoringSafeArea(.all) .background(Color.black)
+        .alert("Erro de Login", isPresented: $showLoginError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Usuário ou senha incorretos. Tente novamente.")
+        }
     }
     
     func login() {
@@ -118,7 +125,7 @@ struct LoginView: View {
                     // Aqui você pode guardar o token ou salvar o client no app
                 case .failure(let error):
                     print("Erro ao logar: \(error)")
-                    
+                    showLoginError = true
                 }
             }
     }
