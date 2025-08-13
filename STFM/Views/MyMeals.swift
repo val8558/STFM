@@ -19,7 +19,6 @@ struct MyMeals: View {
             NavigationStack {
                 WaterIntakeView()
                     .padding()
-//                Spacer()
 
                 if diet.meals.isEmpty {
                     VStack {
