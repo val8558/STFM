@@ -10,6 +10,7 @@ import Foundation
 
 struct HomeView: View {
     @EnvironmentObject var clientManager: ClientManager
+    @StateObject var loginViewModel = LoginViewModel()
 
     var body: some View {
         VStack {
@@ -69,6 +70,15 @@ struct HomeView: View {
                             linkTo: ErrorPageView()
                         )
                     }
+                    Button("Deslogar") {
+                        loginViewModel.logout()
+                    }
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .frame(width: 250, height: 40)
+                    .background(Color.yellow)
+                    .cornerRadius(10)
+                    .padding(.top, 10)
                 }
                 .navigationBarBackButtonHidden(true)
             } else {

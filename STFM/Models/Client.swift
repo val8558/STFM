@@ -221,8 +221,8 @@ struct Meal: Decodable, Identifiable, Hashable {
     let type: Int
     let meal: String
     let status: Int
-    let createdAt: String
-    let updatedAt: String
+    let createdAt: String?
+    let updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id

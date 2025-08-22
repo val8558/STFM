@@ -31,19 +31,21 @@ struct MyMeals: View {
                             .padding()
                     }
                 } else {
-                    ForEach(diet.meals, id: \.id) { meal in
-                        let title = mealTypeTitle(for: meal.type)
-                        let image = mealTypeImage(for: meal.type)
-                        MealMenuContainerLeftView(
-                            title: title,
-                            content: "",
-                            image: image,
-                            imageWidth: 50,
-                            imageHeight: 80,
-                            destination: MealDetailView(meal: meal, mealTitle: title)
-                        )
+                    ScrollView {
+                        ForEach(diet.meals, id: \.id) { meal in
+                            let title = mealTypeTitle(for: meal.type)
+                            let image = mealTypeImage(for: meal.type)
+                            MealMenuContainerLeftView(
+                                title: title,
+                                content: "",
+                                image: image,
+                                imageWidth: 50,
+                                imageHeight: 80,
+                                destination: MealDetailView(meal: meal, mealTitle: title)
+                            )
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
 
                 Spacer()
@@ -73,13 +75,13 @@ private func mealTypeTitle(for type: Int) -> String {
 private func mealTypeImage(for type: Int) -> String {
     switch type {
     case 0: return "dejejum"
-    case 1: return "BreakFast"
+    case 1: return "breakfast"
     case 2: return "almoco"
     case 3: return "cafeDaTarde"
     case 4: return "lancheTarde"
     case 5: return "almoco"
     case 6: return "ceia"
-    default: return "BreakFast"
+    default: return "breakfast"
     }
 }
 
