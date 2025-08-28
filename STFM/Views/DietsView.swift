@@ -19,7 +19,6 @@ struct DietsView: View {
             VStack {
                 dietsContent(client: client)
             }
-//            .ignoresSafeArea()
             .background(Color.backgroundGray)
         } else {
             Text("Carregando informações do cliente...")
@@ -52,7 +51,6 @@ struct DietsView: View {
     private func infoCard(diet: Diet, title: String, image: String) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(height: 150)
-//            .padding()
             .foregroundStyle(.white)
             .overlay(cardOverlay(title: title, image: image, selectedDietValue: diet))
     }
@@ -78,14 +76,9 @@ struct DietsView: View {
                 .padding()
                 .cornerRadius(12)
             }
-//            Spacer()
             Image(image)
                 .resizable()
                 .frame(width: 90, height: 90)
         }
     }
 }
-
-//#Preview {
-//    DietsView()
-//}

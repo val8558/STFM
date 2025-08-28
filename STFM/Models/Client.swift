@@ -22,16 +22,6 @@ enum Status: String, Codable {
     case excellent = "Excelente"
 }
 
-//struct Client: Codable {
-//    let name: String
-//    let age: Int
-//    let gender: Gender
-//    let initialWeight: Double = 0.0
-//    let currentWeight: Double
-//    let weightGoal: Double
-//    let reference: Status
-//}
-
 struct LoginResponse: Decodable {
     let status: Bool
     let message: String
@@ -61,11 +51,6 @@ struct Client: Decodable {
     let diets: [Diet]?
     let createdAt: String
     let updatedAt: String
-    
-//        let initialWeight: Double = 0.0
-//        let currentWeight: Double
-//        let weightGoal: Double
-//        let reference: Status
 
     enum CodingKeys: String, CodingKey {
         case id

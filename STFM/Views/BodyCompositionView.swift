@@ -26,10 +26,8 @@ struct BodyCompositionView: View {
                 .background(Color.white)
                 .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 20))
                 
-                // Cards de informações principais
                 weightInfoView(client: client)
                 
-                // Lista dos itens de composição corporal
                 List(viewModel.items) { item in
                     BodyCompositionRow(item: item)
                 }
@@ -42,7 +40,6 @@ struct BodyCompositionView: View {
             }
         }
     }
-    // Informações sobre peso inicial, atual e meta
     private func weightInfoView(client: Client) -> some View {
         HStack {
             weightInfoBox(title: "Peso Inicial", value: String(format: "%.1f", client.initialWeight ?? 0.0))
@@ -67,7 +64,6 @@ struct BodyCompositionView: View {
     }
 }
 
-// Card de cada item da lista
 struct BodyCompositionRow: View {
     let item: BodyComposition
     
@@ -88,7 +84,7 @@ struct BodyCompositionRow: View {
             }
             
             Text(item.status)
-                .frame(width: 130, height: 80) // ✅ Define um tamanho fixo para alinhar
+                .frame(width: 130, height: 80) 
                 .background(item.color.color)
                 .foregroundColor(.black)
                 .cornerRadius(8)

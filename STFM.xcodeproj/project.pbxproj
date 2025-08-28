@@ -19,16 +19,28 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				ViewModels/WeightProgressViewModel.swift,
 			);
 			target = 6DDE12282CFE1F850082B8DE /* STFM */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		36CFD4552E5FCB890047FF8B /* Exceptions for "STFM" folder in "Copy Bundle Resources" phase from "STFM" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 6DDE12272CFE1F850082B8DE /* Resources */;
+			membershipExceptions = (
+				ViewModels/WeightProgressViewModel.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6DDE122B2CFE1F850082B8DE /* STFM */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				365490A42DDBDA9C00328E2A /* Exceptions for "STFM" folder in "STFM" target */,
+				36CFD4552E5FCB890047FF8B /* Exceptions for "STFM" folder in "Copy Bundle Resources" phase from "STFM" target */,
 			);
 			path = STFM;
 			sourceTree = "<group>";

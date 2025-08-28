@@ -2,7 +2,7 @@
 //  Auth.swift
 //  STFM
 //
-//  Created by Mariana Maiko on 21/08/25.
+//  Created by Mariana Maiko on 21/05/25.
 //
 import Alamofire
 import Foundation
@@ -42,7 +42,7 @@ enum UserType: String, CaseIterable, Identifiable {
     var endpoint: String {
         switch self {
         case .client: return "https://stfm.technest.net.br/api/client/login"
-        case .doctor: return "https://stfm.technest.net.br/api/doctor/login"
+        case .doctor: return "https://stfm.technest.net.br/api/auth/login"
         }
     }
 }

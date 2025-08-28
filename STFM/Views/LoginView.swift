@@ -9,9 +9,9 @@ import SwiftUI
 import Alamofire
 
 struct LoginView: View {
-    @StateObject private var viewmodel = LoginViewModel()
     @EnvironmentObject var clientManager: ClientManager
     @State private var selectedUser: UserType = .client
+    @EnvironmentObject var viewmodel: LoginViewModel
     
     var body: some View {
         NavigationStack{
@@ -86,7 +86,6 @@ struct LoginView: View {
                                         HomeView()
                                     }
                                     
-//                                    HStack {
                                         Spacer()
                                         NavigationLink(destination: ForgotPasswordView()) {
                                             Text("Esqueceu sua senha?")
@@ -94,7 +93,6 @@ struct LoginView: View {
                                                 .foregroundColor(.white)
                                                 .padding()
                                         }
-//                                    }
                                     .padding(.top, 12)
                                     .padding(.horizontal)
                                     .padding(.bottom, 100)

@@ -8,17 +8,7 @@
 import SwiftUI
 
 struct ProgressSectionView: View {
-    @State private var progress: Double = 0.5 // Progresso inicial (50%)
     @EnvironmentObject var clientManager: ClientManager
-    
-    private func calculateProgress(current: Double?, goal: Double?) -> Double {
-        guard let current = current, let goal = goal, goal != 0 else {
-            return 0.0
-        }
-        let difference = abs(current - goal)
-        let totalChange = abs((current > goal ? current - goal : goal - current))
-        return 1.0 - (difference / totalChange)
-    }
     
     var body: some View {
         if let client = clientManager.client {
@@ -29,7 +19,6 @@ struct ProgressSectionView: View {
                     .foregroundColor(.black)
                     .padding(.top, 20)
                     .padding(.bottom, 30)
-                
                 
                 ProgressView(value: calculateProgress(current: client.initialWeight, goal: client.weightGoal), total: 1.0)
                     .frame(height: 10.0)
@@ -69,7 +58,7 @@ struct ProgressSectionView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                                 .padding(.bottom, 30)
-                                 
+                            
                         }
                         VStack {
                             Text("Próxima consulta")
@@ -85,18 +74,23 @@ struct ProgressSectionView: View {
                                 .foregroundColor(.black)
                                 .padding(.bottom, 20)
                         }
-                        
                     }
-                    
-                    
-                    
                 }
-                
             }.frame(width: 380, height: 280)
                 .background(Color.white)
                 .cornerRadius(20)
                 .padding()
         }
+    }
+}
+
+extension ProgressSectionView {
+    private func calculateProgress(current: Double?, goal: Double?) -> Double {
+        guard let current = current, let goal = goal, goal != 0 else {
+            return 0.0
+        }
+        let totalChange = abs(current > goal ? current - goal : 0.0)
+        return 1.0 - (totalChange / 100)
     }
 }
 

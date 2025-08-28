@@ -10,7 +10,6 @@ import Foundation
 
 struct HomeView: View {
     @EnvironmentObject var clientManager: ClientManager
-    @StateObject var loginViewModel = LoginViewModel()
 
     var body: some View {
         VStack {
@@ -71,7 +70,7 @@ struct HomeView: View {
                         )
                     }
                     Button("Deslogar") {
-                        loginViewModel.logout()
+                        UserDefaults.standard.removeObject(forKey: "authToken")
                     }
                     .font(.headline)
                     .foregroundColor(.black)
@@ -84,7 +83,6 @@ struct HomeView: View {
             } else {
                 Text("Carregando...")
                     .onAppear {
-                        // Adicionando um pequeno delay para verificar se o client foi atualizado
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             if clientManager.client == nil {
                                 print("Erro: O clientManager não foi atualizado corretamente.")
@@ -96,7 +94,3 @@ struct HomeView: View {
         .background(Color.backgroundGray)
     }
 }
-
-//#Preview {
-//    HomeView()
-//}

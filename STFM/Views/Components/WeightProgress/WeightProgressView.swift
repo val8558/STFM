@@ -32,19 +32,13 @@ struct WeightProgressView: View {
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.black)
                         }
-//                        Text("\(String(format: "%.1f", client)) kg")
-//                            .font(.system(size: 24, weight: .bold))
-//                            .foregroundColor(.black)
+
                         Spacer()
                             .frame(height: 10)
                         Text("Minha meta")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.black)
-//                        if let ultimoPeso = client.avaliations.last?.weight {
-//                            Text("\(String(format: "%.1f", ultimoPeso)) kg")
-//                                .font(.system(size: 24, weight: .bold))
-//                                .foregroundColor(.black)
-//                        }
+
                         if let lastWeightTarget = client.objectives?.last?.weight {
                             Text("\(String(format: "%.1f", lastWeightTarget)) kg")
                                 .font(.system(size: 24, weight: .bold))

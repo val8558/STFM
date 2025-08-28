@@ -16,10 +16,9 @@ final class LoginViewModel: ObservableObject {
     @AppStorage("authToken") var authToken: String?
     
     private let authService: AuthenticationService
-    private let clientManager: ClientManager
+    @ObservedObject var clientManager: ClientManager
     
-    init(authService: AuthenticationService = APIAuthenticationService(),
-    clientManager: ClientManager = ClientManager()) {
+    init(authService: AuthenticationService = APIAuthenticationService(), clientManager: ClientManager) {
         self.authService = authService
         self.clientManager = clientManager
     }

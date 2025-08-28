@@ -53,9 +53,7 @@ struct MyMeals: View {
             .navigationTitle("Minhas Refeições")
             .navigationBarTitleDisplayMode(.inline)
         }
-        //            .ignoresSafeArea()
         .background(Color.backgroundGray)
-        //        .ignoresSafeArea()
     }
 }
 
